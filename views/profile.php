@@ -31,19 +31,33 @@ $userData = $data['user_data'];
     <title><?php echo htmlspecialchars($profileUser); ?>'s Profile</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: Garamond, serif;
+            
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            max-width: 30%;
+            background-color:  #7a8450;
+        }
+
+        .user-profile {
+            background-color: #f8efda;
             padding: 20px;
+
         }
 
         .follow-btn {
+            font-family: Garamond, serif;
+            border: none;
+            background-image: linear-gradient(to bottom right, #7a8450, #7a8450);
+            color: white; 
             padding: 5px 10px;
             cursor: pointer;
-        }
+    }
     </style>
 </head>
 
 <body>
 
+<div class="user-profile">
     <h2>
         <?php
         if ($profileUser === $viewer) {
@@ -68,16 +82,17 @@ $userData = $data['user_data'];
         <?php elseif ($isFollowing): ?>
             <form action="../controllers/user.php" method="POST">
                 <input type="hidden" name="unfollow_user" value="<?php echo htmlspecialchars($profileUser); ?>">
-                <button type="submit">Unfollow</button>
+                <button class="follow-btn" type="submit">Unfollow</button>
             </form>
 
         <?php else: ?>
             <form action="../controllers/user.php" method="POST">
                 <input type="hidden" name="follow_user" value="<?php echo htmlspecialchars($profileUser); ?>">
-                <button type="submit">Follow</button>
+                <button class="follow-btn" type="submit">Follow</button>
             </form>
         <?php endif; ?>
     </div>
+</div>
 
 </body>
 

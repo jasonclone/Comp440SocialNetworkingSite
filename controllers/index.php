@@ -98,20 +98,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if (($_GET['action'] ?? '') === 'home') {
         $search_tag = $_SESSION['search_tag'] ?? ""; // retain search tag if any
 
-
-        // keep if else. if only first case always occur it would always show no blogs. if only second case would occur every time, searching by tag would show all blogs.
+        // Clear previous search results
         if ($search_tag !== "") { // if search tag provided
-            // get blogs with that tag
+            // Fetch blogs matching the search tag
             $stmt = $UserDBConnect->prepare("
-                    SELECT B.blog_id, B.username, B.subject, B.description, B.created_at,
-                        GROUP_CONCAT(DISTINCT T.tag) AS tags
-                    FROM Blogs B
-                    LEFT JOIN BlogTags BT ON B.blog_id = BT.blog_id
-                    LEFT JOIN Tags T ON BT.tag_id = T.tag_id
-                    WHERE T.tag = ?
-                    GROUP BY B.blog_id
-                    ORDER BY B.created_at DESC
-                ");
+        SELECT B.blog_id, B.username, B.subject, B.description, B.created_at,
+               GROUP_CONCAT(DISTINCT T.tag) AS tags
+        FROM Blogs B
+        JOIN BlogTags BT_filter ON B.blog_id = BT_filter.blog_id
+        JOIN Tags T_filter ON BT_filter.tag_id = T_filter.tag_id AND T_filter.tag = ?
+        JOIN BlogTags BT ON B.blog_id = BT.blog_id
+        JOIN Tags T ON BT.tag_id = T.tag_id
+        GROUP BY B.blog_id
+        ORDER BY B.created_at DESC
+    ");
             $stmt->bind_param("s", $search_tag);
         } else { // if no search tag or search button clicked
             // Fetch all blogs

@@ -69,9 +69,27 @@ CREATE INDEX idx_follower ON Followers (follower_username);
 -- Index for quickly finding who follows a given user
 CREATE INDEX idx_followed ON Followers (followed_username);
 
--- ========== TRIGGERS to enforce per-day limits and constraints ==========
+-- ========== TRIGGERS ==========
 
--- Trigger: limit 2 blogs per user per day
+-- delete tags from tags table that are no longer linked to any blog
+DELIMITER $$
+
+CREATE TRIGGER trg_after_delete_blog
+AFTER DELETE ON Blogs
+FOR EACH ROW
+BEGIN
+    -- Delete all tags that are not associated with any blogs
+    DELETE FROM Tags
+    WHERE tag_id NOT IN (
+        SELECT DISTINCT tag_id FROM BlogTags
+    );
+END$$
+
+DELIMITER ;
+
+
+
+-- limit 2 blogs per user per day
 DELIMITER $$
 
 CREATE TRIGGER trg_before_insert_blog
@@ -88,9 +106,9 @@ BEGIN
   END IF;
 END$$
 
-DELIMITER;
+DELIMITER ;
 
--- Trigger: comments constraints
+-- comments constraints
 DELIMITER $$
 
 CREATE TRIGGER trg_before_insert_comment
@@ -127,5 +145,5 @@ BEGIN
   END IF;
 END$$
 
-DELIMITER;
+DELIMITER ;
 -- ========================================================================

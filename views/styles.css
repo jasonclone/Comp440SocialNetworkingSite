@@ -1,0 +1,236 @@
+body { font-family: Garamond, serif; padding: 20px; background-color: #7a8450; }
+/* STYLES FOR LOGIN PAGE */
+.error:empty { display: none; }
+.container {
+    width: 800px;
+    margin: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    background-color: #f8efda;
+
+    display: flex;
+    justify-content: center;
+
+    font-family: Garamond, serif;
+}
+.container form {
+    width: 100%;
+    padding: 50px;
+    
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+}
+.container form input[type="text"],
+.container form input[type="password"],
+.container form input[type="email"] {
+    padding: 8px;
+    margin-bottom: 10px;
+    
+    background-color: #f2efefff;
+    border: 1px solid #ccc;
+
+    font-family: Garamond, serif;
+    font-weight: bold;
+}
+.container form input[type="submit"] {
+    align-self: center;
+    width: 50%;
+    padding: 8px;
+    margin-top: 10px; 
+
+    font-family: Garamond, serif;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.signup-btn {
+    border: none;
+    background-image: linear-gradient(to bottom right, #7a8450, #7a8450);
+    color: white; 
+}
+.login-btn {
+    border: none;
+    background-image: linear-gradient(to bottom right, #f8efda, #f8efda);
+    color: #7a8450;
+}
+.signup {
+    background-image: linear-gradient(to bottom right, #f8efda, #f8efda); 
+}
+.login {
+    background-image: linear-gradient(to bottom right, #7a8450, #7a8450); 
+}
+.signup-header {
+    color: #7a8450;
+}
+.login-header {
+    color: #f8efda;
+}
+h1 {
+    text-align: center;
+}
+
+/* STYLES FOR BLOG PAGE */
+main { /* styling for welcome, search, and blog post section */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: max-content;
+
+    font-family: Garamond, serif;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    background-color: #f8efda;
+}
+h3 {
+    font-family: Garamond, serif;
+    font-weight: bold;
+}
+.welcome-section {
+    padding: 0px 8px 8px 8px;
+    align-self: stretch;
+    max-width: 15%;
+            
+    height: 500px;
+    border-right: 1px solid #d2c7b8;
+}
+.post-blog-section { /* search + blog post section */
+    width: 80%;
+    flex-grow: 1;
+    box-sizing: border-box;
+}
+.blog-section {
+    order: 1;
+    flex-basis: 100%;
+
+    padding: 0px 8px 8px 8px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.search-section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+           
+    padding: 0px 8px 8px 8px;
+    box-sizing: border-box;
+
+    border-bottom: 1px solid #d2c7b8;
+}
+.blog-section form textarea,
+.blog-section form input[type="text"] {
+    padding: 6px;
+    width: 400px;
+    margin-bottom: 10px;
+
+    background-color: #f2efefff;
+    border: 1px solid #ccc;
+
+    font-family: Garamond, serif;
+    font-weight: bold;
+}
+.search-section form input[type="text"] {
+    padding: 6px;
+    width: 350px;
+
+    background-color: #f2efefff;
+    border: 1px solid #ccc;
+
+    font-family: Garamond, serif;
+    font-weight: bold;
+}
+.blog-card { 
+    background-color: #f8efda;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    font-family: Garamond, serif;
+    font-weight: bold;
+
+    padding: 10px; 
+    margin-bottom: 10px; 
+}
+.comment-form select,
+.comment-form input[type="text"] {
+    font-family: Garamond, serif;
+
+}
+.analytics-section {
+    padding: 10px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    background-color: #f8efda;
+    display: none;
+
+    font-family: Garamond, serif;
+}
+.dual-user-section form input[type="text"],
+.most-blogs-section form input[type="date"],
+.x-y-section form input[type="text"],
+.never-post-section form input[type="text"],
+.only-positive-section form input[type="text"],
+.only-negative-section form input[type="text"],
+.receive-negative-section form input[type="text"] {
+    padding: 6px;
+    margin-bottom: 10px;
+
+    background-color: #f2efefff;
+    border: 1px solid #ccc;
+
+    font-family: Garamond, serif;
+    font-weight: bold;
+}
+.dual-user-section form button[type="submit"],
+.most-blogs-section form button[type="submit"],
+.x-y-section form button[type="submit"],
+.never-post-section form button[type="submit"],
+.only-positive-section form button[type="submit"],
+.only-negative-section form button[type="submit"],
+.receive-negative-section form button[type="submit"] {
+    align-self: center; 
+    padding: 6px;
+
+    font-family: Garamond, serif;
+    font-weight: bold;
+    cursor: pointer;
+
+    border: none;
+    background-image: linear-gradient(to bottom right, #7a8450, #7a8450);
+    color: white;
+}
+
+.meta { font-size: 0.9em; color: #555; } /* styling for metadata like username and timestamp */
+.comments { display: none; margin-top: 10px; border-top: 1px dashed #aaa; padding-top: 10px; }
+.comment { margin-bottom: 5px; }
+
+/* button styles */
+.post-blog-btn {
+    margin-top: 10px; 
+    padding: 8px;
+
+    font-family: Garamond, serif;
+    cursor: pointer;
+
+    border: none;
+    background-image: linear-gradient(to bottom right, #7a8450, #7a8450);
+    color: white; 
+}
+.logout-btn, 
+.comment-btn {
+    padding: 3px;
+
+    font-family: Garamond, serif;
+    cursor: pointer;
+
+    border: none;
+    background-image: linear-gradient(to bottom right, #7a8450, #7a8450);
+    color: white; 
+}
+.toggle-btn { margin-top: 10px; cursor: pointer; background-color: #eee; border: 1px solid #ccc; padding: 5px 10px; }
+.analytics-toggle-btn {
+    margin-top: 10px; 
+    cursor: pointer; 
+    border-bottom: 1px solid #373d20; 
+    padding: 5px 10px; 
+
+    text-align: center;
+    font-family: Garamond, serif;
+    font-weight: bold;
+}
+.submit-search-btn { visibility: hidden; }

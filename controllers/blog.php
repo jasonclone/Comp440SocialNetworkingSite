@@ -240,51 +240,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') { // if post request
                 $search_results[] = $row; // add processed row to results
             }
             $stmt->close();
-        } else {  // if no tag input, return all blogs
-            $stmt = $UserDBConnect->prepare("
-            -- gets all blogs
-            SELECT B.blog_id, B.username, B.subject, B.description, B.created_at,
-                GROUP_CONCAT(DISTINCT T.tag) AS tags
-            FROM Blogs B
-            LEFT JOIN BlogTags BT ON B.blog_id = BT.blog_id
-            LEFT JOIN Tags T ON BT.tag_id = T.tag_id
-            GROUP BY B.blog_id
-            ORDER BY B.created_at DESC
-    ");
-            $stmt->execute();
-            $result = $stmt->get_result();
-
-            $search_results = []; //* holds each blog with their tags and comments as elements of the array
-
-            while ($row = $result->fetch_assoc()) { // for each blog row
-                // Convert tags string to array
-                $row['tags'] = $row['tags'] ? explode(',', $row['tags']) : []; // a string like "tag1,tag2,tag3" → array ["tag1","tag2","tag3"]
-
-                // Fetch comments for this blog
-                $stmtComments = $UserDBConnect->prepare("
-            -- gets comments for this blog
-            SELECT commenter, sentiment, description, created_at
-            FROM Comments
-            WHERE blog_id = ?
-            ORDER BY created_at ASC
-        ");
-                $stmtComments->bind_param("i", $row['blog_id']);
-                $stmtComments->execute();
-                $resultComments = $stmtComments->get_result();
-                $comments = [];
-                // store comments from this specific blog into comments array
-                while ($commentRow = $resultComments->fetch_assoc()) { // for each comment row
-                    $comments[] = $commentRow; // add comment to comments array
-                }
-                $stmtComments->close();
-
-                // row['comments'] is an array of comment rows for this blog
-                $row['comments'] = $comments;
-
-                // add processed row to results
-                $search_results[] = $row;
-            }
-            $stmt->close();
+        } else {
+            // if no tag input provided, return empty results for index.php to handle
+            $search_results = [];
         }
 
         // Save results to session so the view can display them
