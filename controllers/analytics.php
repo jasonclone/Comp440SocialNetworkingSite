@@ -166,16 +166,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['all_positive_user'] = $userX;
         } else {
             $sql = "
-            SELECT b.blog_id, b.subject, b.description, b.username, b.created_at,
-                   GROUP_CONCAT(DISTINCT t.tag ORDER BY t.tag ASC) AS tags
-            FROM Blogs b
-            LEFT JOIN BlogTags bt ON b.blog_id = bt.blog_id
-            LEFT JOIN Tags t ON bt.tag_id = t.tag_id
-            LEFT JOIN Comments c ON b.blog_id = c.blog_id
-            WHERE b.username = ?
-            GROUP BY b.blog_id
-            HAVING SUM(CASE WHEN c.sentiment != 'positive' THEN 1 ELSE 0 END) = 0
-            ";
+        SELECT b.blog_id, b.subject, b.description, b.username, b.created_at,
+               GROUP_CONCAT(DISTINCT t.tag ORDER BY t.tag ASC) AS tags
+        FROM Blogs b
+        LEFT JOIN BlogTags bt ON b.blog_id = bt.blog_id
+        LEFT JOIN Tags t ON bt.tag_id = t.tag_id
+        LEFT JOIN Comments c ON b.blog_id = c.blog_id
+        WHERE b.username = ?
+        GROUP BY b.blog_id
+        HAVING COUNT(c.comment_id) > 0
+           AND SUM(CASE WHEN c.sentiment != 'positive' THEN 1 ELSE 0 END) = 0
+        ";
             $stmt = $UserDBConnect->prepare($sql);
             $stmt->bind_param("s", $userX);
             $stmt->execute();
@@ -193,6 +194,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: ../views/home.php");
         exit;
     }
+
 
     //* Users Who Posted Only Negative Comments
     if (isset($_POST['action']) && $_POST['action'] === 'only_negative_comments') {
