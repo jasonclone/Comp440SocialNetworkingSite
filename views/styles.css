@@ -130,14 +130,17 @@ h3 {
 }
 .search-section form input[type="text"] {
     padding: 6px;
-    width: 350px;
+    width: 400px;
 
     background-color: #f2efefff;
     border: 1px solid #ccc;
 
     font-family: Garamond, serif;
     font-weight: bold;
+
 }
+
+
 .blog-card { 
     background-color: #f8efda;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);

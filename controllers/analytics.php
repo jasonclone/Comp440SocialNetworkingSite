@@ -21,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($tag1 === '' || $tag2 === '') {
             $_SESSION['dual_tag_users'] = [];
         } else {
+            // SQL query to find users who posted blogs with both tags on the same day
             $sql = "
             SELECT DISTINCT u.username
             FROM Users u

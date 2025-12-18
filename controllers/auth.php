@@ -79,7 +79,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') { // if post request
                         $errors['phone'] = "Phone number already exists!";
                 }
             } else { // no duplicates, proceed to insert
+                //* hash password for security
                 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+                //* prepare and execute insert statement is to prevent SQL injection
                 $stmt = $UserDBConnect->prepare(
                     "INSERT INTO Users (username, password, firstName, lastName, email, phone) VALUES (?, ?, ?, ?, ?, ?)"
                 );

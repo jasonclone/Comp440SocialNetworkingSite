@@ -82,7 +82,7 @@ unset(
 <head>
     <meta charset="utf-8">
     <title>Blogs</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=<?= time(); // href query allows changes u make in styles.css to appear after a page reload ?>">
     <style>
         .error { 
             color: red; 
@@ -113,9 +113,9 @@ unset(
 <div class="post-blog-section">
     <!-- Search Blogs by Tag Section -->
     <div class="search-section">
-        <h3>Search Blogs by Tag</h3>
+        <h3>Search Blogs by a Tag</h3>
         <form method="post" action="../controllers/blog.php">
-            <input type="text" name="tag" placeholder="Enter a tag to filter (optional), then press enter to view blogs."
+            <input type="text" name="tag" placeholder="Enter a tag to filter (optional), then press enter to view filtered blogs."
                 value="<?php echo htmlspecialchars($search_tag); ?>">
             <input class="submit-search-btn" type="submit" name="search_tag" value="Search">
         </form>
@@ -270,9 +270,9 @@ unset(
     <div class="x-y-section">
         <h3>Find users followed by both users X and Y</h3>
         <form method="post" action="../controllers/analytics.php" name="followed_form">
-            <label>User X:</label>
+            <label>Enter Username X:</label>
             <input type="text" name="user_x" required>
-            <label>User Y:</label>
+            <label>Enter Username Y:</label>
             <input type="text" name="user_y" required>
             <button type="submit" name="action" value="followed_by_both">Search</button>
         </form>
@@ -317,7 +317,7 @@ unset(
     <div class="only-positive-section">
         <h3>Display Blogs of a User where All Comments are Positive</h3>
         <form method="post" action="../controllers/analytics.php">
-            <label>User X:</label><input type="text" name="user_x_all_positive" required>
+            <label>Enter a username:</label><input type="text" name="user_x_all_positive" required>
             <button type="submit" name="action" value="all_positive_comments">Show Blogs</button>
         </form>
 
